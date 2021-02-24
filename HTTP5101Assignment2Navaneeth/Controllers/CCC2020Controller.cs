@@ -148,8 +148,25 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
         /// The second line represents the coordinates of the top-right corner of the rectangular frame.
         /// </para>
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+        /// <param name="input"> Input has to be given in a string format in the following format
+        /// "N-x1_y1-x2_y2-x3_y3-........-xN_yN"
+        /// 5(N)
+        /// 44,62(x,y)
+        /// 34,69(x,y)
+        /// 24,78(x,y)
+        /// 42,44(x,y)
+        /// 64,10(x,y)
+        /// The above input will be given as
+        /// 5-44_62-34_69-24_78-42_44-64_10
+        /// </param>
+        /// <returns>two string on two line containing co-ordinates of bottom-left(line#1) and top-right(line#2)</returns>
+        /// <example>
+        /// GET api/CCC/ArtJ3/5-44_62-34_69-24_78-42_44-64_10
+        /// Output
+        /// ------------
+        /// 23,9
+        /// 65,79
+        /// </example>
         [HttpGet]
         [Route("api/CCC/ArtJ3/{input}")]
         public IEnumerable<string> ArtJ3(string input)
@@ -157,16 +174,25 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             // receive the input as a string and extract the data out of it
             //string s = "5-44_62-34_69-24_78-42_44-64_10";
             System.Diagnostics.Debug.WriteLine(input);
+            // Initially the input contained ':' seperating lines and ',' seperating coordinates
+            // inorder to escape that the urlDecode was mentioned.
+            // New input format contains url friendly characters
             input = WebUtility.UrlDecode(input);
             System.Diagnostics.Debug.WriteLine(input);
+            // splitting the input string to make processing easier
             string[] subs = input.Split('-');
             List<int> xAxis = new List<int>();
             List<int> yAxis = new List<int>();
 
+            // first element of the list is N, thus we can avoid it in processing
+            // so the list is starting from index 1
             for (int i = 1; i < subs.Length; i++)
             {
                 // Console.WriteLine(subs[i]);
                 string[] axes = subs[i].Split('_');
+                // input validation : skipping for now as the document has 
+                // mentioned the input will be in that range
+                // verify whether the x,y values are in the range of 1-99 : 
                 xAxis.Add(int.Parse(axes[0]));
                 yAxis.Add(int.Parse(axes[1]));
             }
@@ -176,6 +202,8 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             int maxX = xAxis.Max();
             int maxY = yAxis.Max();
 
+            // decrementing the bottom left value by 1 for frame
+            // incrementing the top right value by 1 for frame
             int frameMinX = minX - 1;
             int frameMinY = minY - 1;
             int frameMaxX = maxX + 1;
