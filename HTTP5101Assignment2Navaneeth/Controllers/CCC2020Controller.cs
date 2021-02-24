@@ -33,7 +33,8 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
         /// <param name="large">Number of large treats</param>
         /// <returns>["sad","happy"] according to the H formula (1 × S + 2 × M + 3 × L) >= 10 </returns>
         /// <example>
-        /// GET /api/CCC/DogTreatsJ1/1/2/-1 
+        /// GET /api/CCC/DogTreatsJ1/3/1/0 : sad
+        /// GET /api/CCC/DogTreatsJ1/3/2/1 : happy
         /// </example>
         [HttpGet]
         [Route("api/CCC/DogTreatsJ1/{small}/{medium}/{large}")]
@@ -59,6 +60,22 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             {
                 return failMessage;
             }
+        }
+
+        /// <summary>
+        /// Help page
+        /// </summary>
+        /// <returns>Strings with sample input</returns>
+        [HttpGet]
+        [Route("api/CCC/Help/DogTreatsJ1")]
+        public IEnumerable<string> DogTreatsJ1()
+        {
+            string heading = "Help Page";
+            string requestFormat = "requestFormat: GET DogTreatsJ1/small/medium/large";
+            string responseFormat = "responseFormat: happy|sad";
+            string exampleRequest = "exampleRequest: GET /api/CCC/DogTreatsJ1/3/1/0";
+            string exampleResponse = "exampleResponse: sad";
+            return new string[] { heading, requestFormat, responseFormat, exampleRequest, exampleResponse };
         }
 
         /// <summary>
@@ -126,6 +143,21 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             return (dailyInfectedList.Count - 1);
         }
 
+        /// <summary>
+        /// Help page
+        /// </summary>
+        /// <returns>Strings with sample input</returns>
+        [HttpGet]
+        [Route("api/CCC/Help/EpidemiologyJ2")]
+        public IEnumerable<string> EpidemiologyJ2()
+        {
+            string heading = "Help Page";
+            string requestFormat = "requestFormat: GET EpidemiologyJ2/p/n/r";
+            string responseFormat = "responseFormat: integer";
+            string exampleRequest = "exampleRequest: GET api/CCC/EpidemiologyJ2/750/1/5";
+            string exampleResponse = "exampleResponse: 4";
+            return new string[] { heading, requestFormat, responseFormat, exampleRequest, exampleResponse };
+        }
 
         /// <summary>
         /// https://cemc.math.uwaterloo.ca/contests/computing/2020/ccc/juniorEF.pdf J3
@@ -212,12 +244,22 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             return new string[] { frameMinX + "," + frameMinY, frameMaxX + "," + frameMaxY };
         }
 
+        /// <summary>
+        /// Help page
+        /// </summary>
+        /// <returns>Strings with sample input</returns>
         [HttpGet]
         [Route("api/CCC/Help/ArtJ3")]
         public IEnumerable<string> ArtJ3()
         {
-            return new string[] { "Help Page" };
+            string heading = "Help Page";
+            string requestFormat = "requestFormat: GET api/CCC/ArtJ3/N-x1_y1-x2_y2-x3_y3-........-xN_yN";
+            string responseFormat = "responseFormat: x1,y1\nx2,y2";
+            string exampleRequest = "exampleRequest: GET api/CCC/ArtJ3/5-44_62-34_69-24_78-42_44-64_10";
+            string exampleResponse = "exampleResponse: 23,9\n65,79";
+            return new string[] { heading, requestFormat, responseFormat, exampleRequest, exampleResponse };
         }
+    
 
         /// <summary>
         /// Thuc likes finding cyclic shifts of strings. A cyclic shift of a string is obtained by moving characters
@@ -285,6 +327,22 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             {
                 return "yes";
             }
+        }
+
+        /// <summary>
+        /// Help page
+        /// </summary>
+        /// <returns>Strings with sample input</returns>
+        [HttpGet]
+        [Route("api/CCC/Help/CyclicShiftsJ4")]
+        public IEnumerable<string> CyclicShiftsJ4()
+        {
+            string heading = "Help Page";
+            string requestFormat = "requestFormat: GET api/CCC/CyclicShiftsJ4/text/string";
+            string responseFormat = "responseFormat: yes|no";
+            string exampleRequest = "exampleRequest: GET api/CCC/CyclicShiftsJ4/ABCCDEABAA/ABCDE";
+            string exampleResponse = "exampleResponse: yes";
+            return new string[] { heading, requestFormat, responseFormat, exampleRequest, exampleResponse };
         }
     }
 }
