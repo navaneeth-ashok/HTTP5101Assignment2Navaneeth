@@ -344,5 +344,61 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             string exampleResponse = "exampleResponse: yes";
             return new string[] { heading, requestFormat, responseFormat, exampleRequest, exampleResponse };
         }
+
+        /*
+        Escape Room is a backtracking algorithm problem, and will solve if I get enough time
+        You start at (1,1) and you've to reach (m,n)
+        When you start at (1,1) you've to find the value of the two dimensional matrix, and find the divisors of that value.
+        3
+        4
+        3 10 8 14
+        1 11 12 12
+        6 2 3 9
+
+        input_matrix[0,0] => 3
+        Divisors of 3 -> (1,3) and (3,1)
+        These two co-ordinates are the places to which you can move now
+        This has to be written in a fucntion and we'll use recursion to keep on checking
+
+        End Condition
+        ------------
+        If the divisor of an element is (m,n) then you've existed the maze:
+        Else
+        ------------
+        mark the current value as -1 a[i,j] (to mark it as visited)
+        and return false to the calling function
+
+        // pseudo code
+        func findDivisors(x)
+            i = 1
+            while ( i <= sqrt(x)
+                if x % i == 0
+                    list.add(i, x/i)
+                    return list
+                i++
+            
+
+        func solveMaze(i,j)
+            if matrix[i,j] == -1
+                return -1 ( making sure we don't reach an infinite loop by solving the same nodes again
+            else
+                divisorList = findDivisors(matrix[i,j])
+                if (m,n) in divisorList
+                    return "True" // solved the maze
+                else
+                    matrix[i,j] = -1 // so that we dont do these operations again 
+                                     // you can duplicate the matrix to keep track of visited as well
+                    for divisors in divisorList
+                        solveMaze(divisor[0],divisor[1])
+            
+
+        */
+        /*
+        [HttpGet]
+        [Route("api/CCC/EscapeRoomJ5/{input}")]
+        public string EscapeRoomJ5(input)
+        {
+
+        }*/
     }
 }
