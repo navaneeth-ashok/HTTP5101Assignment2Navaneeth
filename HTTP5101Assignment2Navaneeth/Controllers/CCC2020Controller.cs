@@ -191,6 +191,24 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             return new string[] { "Help Page" };
         }
 
+        /// <summary>
+        /// Thuc likes finding cyclic shifts of strings. A cyclic shift of a string is obtained by moving characters
+        /// from the beginning of the string to the end of the string. We also consider a string to be a cyclic
+        /// shift of itself.For example, the cyclic shifts of ABCDE are:
+        /// ABCDE, BCDEA, CDEAB, DEABC, and EABCD.
+        /// Given some text, T, and a string, S, determine if T contains a cyclic shift of S.
+        /// <para>Input Specification
+        /// The input will consist of exactly two lines containing only uppercase letters.The first line will be
+        /// the text T, and the second line will be the string S. Each line will contain at most 1000 characters.
+        /// For 6 of the 15 available marks, S will be exactly 3 characters in length.
+        /// </para>
+        /// <para>Output Specification
+        /// Output yes if the text, T, contains a cyclic shift of the string, S.Otherwise, output no.Output Specification
+        /// Output yes if the text, T, contains a cyclic shift of the string, S.Otherwise, output no.
+        /// </para>
+        /// <param name="textT">Input string : We need to check whether it contains any cyclic shift of inputS</param>
+        /// <param name="inputS">Input string : We need to check whether any cyclic shift of S is present in textT</param>
+        /// <returns> a string "yes" or "no" according to the condition:(cyclicShift(input) in textT</returns>
         [HttpGet]
         [Route("api/CCC/CyclicShiftsJ4/{textT}/{inputS}")]
         public string CyclicShiftsJ4(string textT, string inputS)
@@ -207,15 +225,19 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
             // generating all possible cyclic shifts and adding it into a list
             for ( int i = 0; i < cyclicStringCheck.Length / 2 ; i++)
             {
+                // shifting the index by one point on every iteration and storing the
+                // substring into a list
                 string cyclicSubstring = cyclicStringCheck.Substring(i, inputS.Length);
                 System.Diagnostics.Debug.WriteLine(cyclicSubstring);
                 cyclicShiftList.Add(cyclicSubstring);
             }
+            // return value of IndexOf is -1 if no match is found
             int flag = -1;
             foreach (string cyclicShift in cyclicShiftList)
             {
                 System.Diagnostics.Debug.WriteLine(textT);
                 System.Diagnostics.Debug.WriteLine(cyclicShift);
+                // if a match occurs, it returns the index of the match
                 flag = textT.IndexOf(cyclicShift);
                 if (flag != -1)
                 {
