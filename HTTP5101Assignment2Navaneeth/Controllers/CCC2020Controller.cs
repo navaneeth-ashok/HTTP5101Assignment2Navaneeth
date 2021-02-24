@@ -209,6 +209,11 @@ namespace HTTP5101Assignment2Navaneeth.Controllers
         /// <param name="textT">Input string : We need to check whether it contains any cyclic shift of inputS</param>
         /// <param name="inputS">Input string : We need to check whether any cyclic shift of S is present in textT</param>
         /// <returns> a string "yes" or "no" according to the condition:(cyclicShift(input) in textT</returns>
+        /// <example>
+        /// GET api/CCC/CyclicShiftsJ4/ABCCDEABAA/ABCDE : YES
+        /// GET api/CCC/CyclicShiftsJ4/batman/abcd : NO
+        /// GET api/CCC/CyclicShiftsJ4/ABCDDEBCAB/ABA : NO
+        /// </example>
         [HttpGet]
         [Route("api/CCC/CyclicShiftsJ4/{textT}/{inputS}")]
         public string CyclicShiftsJ4(string textT, string inputS)
